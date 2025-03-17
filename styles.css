@@ -1,0 +1,151 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.container {
+    width: 80%;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #4CAF50;
+    margin-bottom: 50px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.file-inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.file-label {
+    padding: 15px 20px; /* Increase padding for larger file buttons */
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    width: 100%; /* Make the file button span the width of the form */
+    max-width: 250px; /* Limit the maximum width */
+    margin-top: 20px;  /* Add gap between label and button */
+    margin-bottom: 20px; /* Maintain space between the button and image preview */
+    font-size: 16px;
+    display: block;
+}
+
+.file-label:hover {
+    background-color: #45a049;
+}
+
+.large-preview {
+    width: 150px;
+    height: 150px;
+    margin-top: 10px;
+    border: 3px solid #4CAF50;
+    border-radius: 5px;
+    object-fit: cover;
+    display: none;
+    margin-bottom: 20px;
+}
+
+input[type="submit"], .reset-btn {
+    padding: 8px 20px; /* Reduced padding to make the button smaller */
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+    width: 200px; /* Set a fixed width to make both buttons the same size */
+    height: 50px; /* Set a fixed height to make both buttons the same size */
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+input[type="submit"]:hover, .reset-btn:hover {
+    background-color: #45a049;
+}
+
+.reset-btn {
+    background-color: #f44336;
+}
+
+.reset-btn:hover {
+    background-color: #e53935;
+}
+
+.loading-spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border-top-color: #4CAF50;
+    animation: spin 1s ease infinite;
+    margin-top: 20px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.result {
+    text-align: center;
+    margin-top: 30px;
+    transition: background-color 0.3s ease;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.result-same {
+    background-color: #e0ffe0;
+}
+
+.result-different {
+    background-color: #ffe0e0;
+}
+
+h2 {
+    font-size: 24px;
+    color: #4CAF50;
+    margin-bottom: 10px;
+}
+
+h3 {
+    font-size: 18px;
+    color: #333;
+}
+
+#loadingSpinner {
+    display: none;
+}

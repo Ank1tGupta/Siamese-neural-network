@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siamese Neural Network Image Similarity</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Siamese Neural Network Image Similarity</h1>
+        
+        <!-- Error Message Display -->
+        <div id="errorMessage" style="display: none; color: red; text-align: center;"></div>
+        
+        <form method="POST" enctype="multipart/form-data" id="imageForm">
+            <div class="file-inputs">
+                <div class="form-group">
+                    <label for="image1">Upload Image 1:</label>
+                    <input type="file" id="image1" name="image1" accept="image/*" required onchange="previewImage(event, 'img1-preview')">
+                    <label for="image1" class="file-label">Choose File</label>
+                    <img id="img1-preview" class="large-preview" src="" alt="Image 1 Preview" style="display: none;">
+                </div>
+
+                <div class="form-group">
+                    <label for="image2">Upload Image 2:</label>
+                    <input type="file" id="image2" name="image2" accept="image/*" required onchange="previewImage(event, 'img2-preview')">
+                    <label for="image2" class="file-label">Choose File</label>
+                    <img id="img2-preview" class="large-preview" src="" alt="Image 2 Preview" style="display: none;">
+                </div>
+            </div>
+
+            <!-- Submit and Reset Buttons -->
+            <input type="submit" value="Check Similarity">
+            <input type="reset" value="Reset" class="reset-btn" onclick="resetForm()">
+        </form>
+
+        <!-- Loading Spinner -->
+        <div class="loading-spinner" id="loadingSpinner" style="display: none;"></div>
+
+        <!-- Results Display -->
+        {% if distance is not none %}
+            <div class="result {% if similarity %}result-same{% else %}result-different{% endif %}">
+                <h2>Euclidean Distance: {{ distance }}</h2>
+                <h3>{{ 'Same person' if similarity else 'Different persons' }}</h3>
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Function to preview the selected image
+        function previewImage(event, previewId) {
+            const file = event.target.files[0];
+            const output = document.getElementById(previewId);
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function() {
+                    output.src = reader.result;
+                    output.style.display = "block";
+                };
+                reader.readAsDataURL(file);
+            } else {
+                output.style.display = "none";
+            }
+        }
+
+        // Function to reset the form and hide image previews
+        function resetForm() {
+            const form = document.getElementById('imageForm');
+            form.reset();
+            
+            // Hide the image previews
+            document.getElementById('img1-preview').style.display = "none";
+            document.getElementById('img2-preview').style.display = "none";
+            
+            // Hide the result and error message if they are visible
+            document.getElementById('errorMessage').style.display = "none"; // Hide error message
+            const resultDiv = document.querySelector('.result');
+            if (resultDiv) {
+                resultDiv.style.display = "none"; // Hide result section
+            }
+
+            // Hide the loading spinner if it's visible
+            document.getElementById('loadingSpinner').style.display = "none";
+        }
+
+        // Show loading spinner on form submission
+        document.getElementById('imageForm').onsubmit = function() {
+            document.getElementById('loadingSpinner').style.display = 'block';
+        };
+
+        // Example function to display an error message
+        function showError(message) {
+            const errorMessage = document.getElementById('errorMessage');
+            errorMessage.textContent = message;
+            errorMessage.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
